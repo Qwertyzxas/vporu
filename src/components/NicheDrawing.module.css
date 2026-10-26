@@ -1,0 +1,81 @@
+.figure {
+  margin: 0;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.floor {
+  fill: var(--tan);
+}
+
+.box {
+  transition: transform 700ms var(--ease-out);
+}
+
+.niche {
+  fill: var(--walnut);
+}
+
+.block {
+  fill: var(--bone);
+  animation: block-in 500ms var(--ease-out);
+}
+
+.division,
+.outline {
+  fill: none;
+  stroke: var(--walnut-ink);
+  stroke-width: 2;
+}
+
+.division {
+  animation: block-in 500ms var(--ease-out);
+}
+
+.measure {
+  transition: transform 700ms var(--ease-out);
+}
+
+.measure line {
+  stroke: var(--tan);
+  stroke-width: 1.5;
+}
+
+.measure text {
+  fill: var(--bone);
+  font-size: 14px;
+  font-style: italic;
+  font-variant-numeric: tabular-nums;
+}
+
+.caption {
+  margin-top: 12px;
+  font-size: var(--step-small);
+  color: var(--muted);
+  min-height: 3em;
+}
+
+@keyframes block-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .box,
+  .measure {
+    transition: none;
+  }
+
+  .block,
+  .division {
+    animation: none;
+  }
+}

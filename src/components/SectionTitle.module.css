@@ -1,0 +1,5 @@
+.title {
+  font-size: var(--step-head);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}

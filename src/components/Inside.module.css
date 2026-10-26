@@ -1,0 +1,241 @@
+.inside {
+  position: relative;
+  z-index: 1;
+  height: 190svh;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  padding: clamp(96px, 13svh, 136px) var(--margin) clamp(32px, 6svh, 64px);
+  display: grid;
+  grid-template-columns: minmax(0, 46%) 1fr;
+  grid-template-rows: auto 1fr;
+  align-content: start;
+  column-gap: var(--gutter);
+}
+
+.head {
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+  transition:
+    opacity 400ms var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+.stage[data-phase="fit"] .head {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 400ms var(--ease-out),
+    visibility 0s linear 400ms;
+}
+
+.title {
+  font-size: var(--step-head);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.lead {
+  margin-top: 20px;
+  max-width: 34ch;
+}
+
+.parts {
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+  align-self: start;
+  display: grid;
+  gap: 8px;
+  width: min(100%, 420px);
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.part {
+  border-radius: var(--radius);
+  padding: 12px 18px 14px;
+  background: var(--bone);
+  color: var(--walnut-ink);
+  font-size: var(--step-small);
+  line-height: 1.45;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition:
+    opacity 420ms var(--ease-out),
+    transform 620ms var(--ease-out),
+    grid-template-rows 520ms var(--ease-out),
+    visibility 0s linear 420ms;
+}
+
+.part {
+  display: grid;
+  grid-template-rows: auto 0fr;
+}
+
+.part p {
+  min-height: 0;
+  overflow: hidden;
+  color: var(--paper-muted);
+}
+
+.part[data-current],
+.inside[data-static] .part {
+  grid-template-rows: auto 1fr;
+}
+
+.part[data-on] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.partTitle {
+  font-size: var(--step-body);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.fit {
+  position: absolute;
+  z-index: 1;
+  left: var(--margin);
+  bottom: clamp(48px, 12svh, 120px);
+  width: min(40%, 520px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 800ms var(--ease-out),
+    visibility 0s linear 600ms;
+}
+
+.fit[data-on] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.fitTitle {
+  margin-bottom: 16px;
+  font-size: var(--step-head);
+  font-style: italic;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.lines {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.lines g {
+  opacity: 0;
+  transition: opacity 360ms var(--ease-out);
+}
+
+.lines g[data-on] {
+  opacity: 1;
+}
+
+.lines path {
+  fill: none;
+  stroke: var(--tan);
+  stroke-width: 1.5;
+}
+
+.lines circle {
+  fill: var(--bone);
+  stroke: var(--tan);
+  stroke-width: 3;
+}
+
+.inside[data-static] {
+  height: auto;
+}
+
+.inside[data-static] .stage {
+  position: relative;
+  height: auto;
+  min-height: 100svh;
+}
+
+.inside[data-static] .part,
+.inside[data-static] .fit {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.inside[data-static] .fit {
+  position: static;
+  grid-column: 1;
+  margin-top: 48px;
+  width: auto;
+}
+
+.inside[data-static] .lines {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .stage {
+    grid-template-columns: 1fr;
+    padding-top: 88px;
+  }
+
+  .parts {
+    display: block;
+    position: relative;
+    align-self: start;
+    margin-top: 20px;
+    min-height: 120px;
+  }
+
+  .part {
+    position: absolute;
+    inset: 0 0 auto;
+  }
+
+  .fit {
+    left: var(--margin);
+    right: var(--margin);
+    top: 88px;
+    bottom: auto;
+    width: auto;
+    background: var(--walnut);
+    padding-bottom: 12px;
+  }
+
+  .stage[data-phase="fit"] .parts {
+    opacity: 0;
+  }
+
+  .parts {
+    width: 100%;
+    transition: opacity 400ms var(--ease-out);
+  }
+
+  .inside[data-static] .parts {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .inside[data-static] .part {
+    position: static;
+  }
+}

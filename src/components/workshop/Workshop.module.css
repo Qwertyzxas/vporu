@@ -1,0 +1,59 @@
+.wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.track {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
+}
+
+.stage canvas {
+  opacity: 0;
+  animation: appear 1600ms var(--ease-out) 250ms forwards;
+}
+
+.fallback {
+  position: absolute;
+  right: var(--margin);
+  bottom: 8svh;
+  width: min(44vw, 520px);
+  color: var(--bone);
+}
+
+@media (max-width: 899px) {
+  .fallback {
+    left: 50%;
+    right: auto;
+    bottom: 4svh;
+    width: 62vw;
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage canvas {
+    animation: none;
+    opacity: 1;
+  }
+}
